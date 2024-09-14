@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { NewsCard } from "./NewsCard";
 import { newsData } from "../../data/cache/news";
+import { TopNavigation } from "../Menu/TopNavigation";
 
 export function News() {
   const { isPending, error, data, isFetching } = useQuery({
@@ -27,6 +28,7 @@ export function News() {
 
   return (
     <div>
+      <TopNavigation />
       <h1>News</h1>
       <p>This is a news page.</p>
 
