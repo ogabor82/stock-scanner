@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { NewsCard } from "./NewsCard";
+import { newsData } from "../../data/cache/news";
 
 export function News() {
   const { isPending, error, data, isFetching } = useQuery({
@@ -10,7 +11,13 @@ export function News() {
           import.meta.env.VITE_VANTAGE_KEY
         }`
       );
-      return await response.json();
+
+      const data = await response.json();
+      if (!data.feed) {
+        return newsData;
+      }
+
+      return data;
     },
   });
 
