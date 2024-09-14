@@ -21,7 +21,7 @@ export function News() {
       <p>This is a news page.</p>
 
       {data.feed.map((item: any) => (
-        <div key={item.id}>
+        <div key={item.id} className="border border-blue-600">
           <h2>{item.title}</h2>
           <p>{item.summary}</p>
         </div>
