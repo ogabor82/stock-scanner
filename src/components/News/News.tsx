@@ -20,6 +20,7 @@ export function News() {
 
       return data;
     },
+    staleTime: 30000,
   });
 
   if (isPending) return "Loading...";

@@ -20,7 +20,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
         {item.ticker_sentiment.map((ticker) => (
           <div key={ticker.ticker}>
             <p>
-              {ticker.ticker}{" "}
+              <Tag color="blue">{ticker.ticker}</Tag>
               <Button
                 type="primary"
                 size="small"
