@@ -1,9 +1,5 @@
-import React, { useState } from "react";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { useState } from "react";
+import { MailOutlined, SettingOutlined, HeartFilled } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -14,12 +10,12 @@ const items: MenuItem[] = [
   {
     label: "News",
     key: "news",
-    icon: <MailOutlined />,
+    icon: <MailOutlined style={{ color: "green" }} />,
   },
   {
     label: "Favorites",
     key: "favorites",
-    icon: <AppstoreOutlined />,
+    icon: <HeartFilled style={{ color: "hotpink" }} />,
   },
   {
     label: "Navigation Three - Submenu",
