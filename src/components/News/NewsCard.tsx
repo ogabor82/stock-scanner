@@ -1,7 +1,15 @@
 import { NewsItem } from "../../models/news";
-import { Tag } from "antd";
+import { Tag, Button } from "antd";
+import { addFavorite } from "../../store";
+import { useDispatch } from "react-redux";
 
 export function NewsCard({ item }: { item: NewsItem }) {
+  const dispatch = useDispatch();
+
+  const addFavoriteHandler = (ticker: string) => {
+    dispatch(addFavorite(ticker));
+  };
+
   return (
     <div className="border border-blue-600 w-96 h-full rounded-lg">
       <h2 className="font-bold min-h-20">{item.title}</h2>
@@ -11,7 +19,18 @@ export function NewsCard({ item }: { item: NewsItem }) {
       <div className="flex justify-between flex-wrap">
         {item.ticker_sentiment.map((ticker) => (
           <div key={ticker.ticker}>
-            <p>{ticker.ticker}</p>
+            <p>
+              {ticker.ticker}{" "}
+              <Button
+                type="primary"
+                size="small"
+                onClick={() => {
+                  addFavoriteHandler(ticker.ticker);
+                }}
+              >
+                Favorite
+              </Button>
+            </p>
             <Tag color="green">{ticker.ticker_sentiment_label}</Tag>
           </div>
         ))}
