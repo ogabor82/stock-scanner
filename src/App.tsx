@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { SymbolPage } from "./components/Symbol/SymbolPage";
 import { Home } from "./components/Home/Home";
 import { useEffect } from "react";
+import LeftNavigation from "./components/Menu/LeftNavigation";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +50,10 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <div className="flex flex-row h-full gap-48">
+          <LeftNavigation />
+          <RouterProvider router={router} />
+        </div>
       </QueryClientProvider>
     </>
   );
