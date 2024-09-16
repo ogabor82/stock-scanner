@@ -6,6 +6,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { SymbolPage } from "./components/Symbol/SymbolPage";
 import { Home } from "./components/Home/Home";
 import LeftNavigation from "./components/Menu/LeftNavigation";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchFavorite } from "./store/favorite";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch<any>();
+  useEffect(() => {
+    dispatch(fetchFavorite());
+  }, []);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
