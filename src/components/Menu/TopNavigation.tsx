@@ -4,6 +4,7 @@ import {
   SettingOutlined,
   HeartFilled,
   HomeFilled,
+  StockOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
@@ -71,11 +72,20 @@ export function TopNavigation() {
   };
 
   return (
-    <Menu
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={items}
-    />
+    <div className="flex justify-between items-center p-4 bg-gray-200">
+      <div className="font-bold">
+        <span className="text-5xl text-green-600">
+          <StockOutlined />
+        </span>
+        {""}
+        <span className="text-red-500">StockSight</span>
+      </div>
+      <Menu
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+      />
+    </div>
   );
 }
