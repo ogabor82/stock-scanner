@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { MailOutlined, SettingOutlined, HeartFilled } from "@ant-design/icons";
+import {
+  MailOutlined,
+  SettingOutlined,
+  HeartFilled,
+  HomeFilled,
+} from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +13,11 @@ type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [
   {
+    label: "Home",
+    key: "",
+    icon: <HomeFilled style={{ color: "hotpink" }} />,
+  },
+  {
     label: "News",
     key: "news",
     icon: <MailOutlined style={{ color: "green" }} />,
@@ -15,7 +25,7 @@ const items: MenuItem[] = [
   {
     label: "Favorites",
     key: "favorites",
-    icon: <HeartFilled style={{ color: "hotpink" }} />,
+    icon: <HeartFilled style={{ color: "red" }} />,
   },
   {
     label: "Navigation Three - Submenu",

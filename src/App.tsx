@@ -6,17 +6,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { SymbolPage } from "./components/Symbol/SymbolPage";
+import { Home } from "./components/Home/Home";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <News />,
+    element: <Home />,
   },
   {
     path: "/",
-    element: <News />,
+    element: <Home />,
   },
   {
     path: "/news",
