@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { login, logout } from "../../store";
+import { login, logout } from "../../store/auth";
 import { useDispatch } from "react-redux";
 
 export function Auth() {

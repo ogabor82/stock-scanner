@@ -1,7 +1,7 @@
 import { NewsItem } from "../../models/news";
 import { Tag, Button } from "antd";
-import { addFavorite } from "../../store";
 import { useDispatch } from "react-redux";
+import { addFavorite } from "../../store/favorite";
 
 export function NewsCard({ item }: { item: NewsItem }) {
   const dispatch = useDispatch();
