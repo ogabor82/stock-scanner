@@ -1,26 +1,24 @@
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { NewsCard } from "./NewsCard";
-import { newsData } from "../../data/cache/news";
 import { TopNavigation } from "../Menu/TopNavigation";
+import { SymbolOverview } from "./SymbolOverview";
 
-export function News() {
+export function SymbolPage() {
+  const { symbol } = useParams();
+
   const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ["newsData"],
+    queryKey: ["symbolData", symbol],
     queryFn: async () => {
       const response = await fetch(
-        `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=${
+        `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${
           import.meta.env.VITE_VANTAGE_KEY
         }`
       );
 
       const data = await response.json();
-      if (!data.feed) {
-        return newsData;
-      }
-
       return data;
     },
-    staleTime: 30000,
+    staleTime: 3000000,
   });
 
   if (isPending) return "Loading...";
@@ -30,18 +28,14 @@ export function News() {
   return (
     <div>
       <TopNavigation />
-      <h1>News</h1>
-      <p>This is a news page.</p>
-
-      <div className="grid grid-cols-3 gap-4">
-        {data.feed.map((item: any) => (
-          <div key={item.id}>
-            <NewsCard item={item} />
-          </div>
-        ))}
-      </div>
-
       <div>{isFetching ? "Updating..." : ""}</div>
+      <h1 className="font-bold text-lg">
+        Symbol: {symbol} - {data.Name}
+      </h1>
+      <div className="flex justify-between">
+        <img src="https://www.bankrate.com/brp/2023/08/22121220/chart.jpg" />
+        <SymbolOverview data={data} />
+      </div>
     </div>
   );
 }
