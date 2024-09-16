@@ -1,14 +1,22 @@
 import { NewsItem } from "../../models/news";
 import { Tag, Button } from "antd";
-import { useDispatch } from "react-redux";
-import { addFavorite } from "../../store/favorite";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, sendFavorite } from "../../store/favorite";
+import { useEffect } from "react";
 
 export function NewsCard({ item }: { item: NewsItem }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
+  const favorite = useSelector((state: any) => state.favorite);
 
   const addFavoriteHandler = (ticker: string) => {
     dispatch(addFavorite(ticker));
   };
+
+  useEffect(() => {
+    console.log("Favorite changed");
+
+    dispatch(sendFavorite(favorite));
+  }, [favorite, dispatch]);
 
   return (
     <div className="border border-blue-600 w-96 h-full rounded-lg">

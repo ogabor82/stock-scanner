@@ -1,8 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Action, createSlice } from "@reduxjs/toolkit";
+import { ThunkAction } from "redux-thunk";
+import { RootState } from ".";
+
+const favoriteInitialState: string[] = [];
 
 const favoriteSlice = createSlice({
   name: "favorite",
-  initialState: [],
+  initialState: favoriteInitialState,
   reducers: {
     addFavorite(state: any, action) {
       const isExist = state.find((item: any) => item === action.payload);
@@ -15,5 +19,28 @@ const favoriteSlice = createSlice({
     },
   },
 });
+
+export const sendFavorite = (
+  favorite: any
+): ThunkAction<void, RootState, null, Action<string>> => {
+  return async () => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        "https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/favorite.json",
+        {
+          method: "PUT",
+          body: JSON.stringify(favorite),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Could not send favorite");
+      }
+    };
+
+    await sendRequest();
+  };
+};
+
 export const { addFavorite, removeFavorite } = favoriteSlice.actions;
 export default favoriteSlice.reducer;

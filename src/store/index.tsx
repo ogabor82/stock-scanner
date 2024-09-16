@@ -9,4 +9,6 @@ export const store = configureStore({
   },
 });
 
+export type RootState = ReturnType<typeof favoriteSliceReducer>;
+
 export default store;
