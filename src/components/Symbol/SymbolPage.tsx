@@ -47,7 +47,6 @@ export function SymbolPage() {
 
   useEffect(() => {
     const cacheData = async () => {
-      console.log("data 2", data);
       const response = await fetch(
         `https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/cache/${symbol}.json`,
         {
@@ -60,10 +59,10 @@ export function SymbolPage() {
         throw new Error("Could not send favorite");
       }
     };
-    if (data) {
+    if (data && !cachedData) {
       cacheData();
     }
-  }, [data, symbol]);
+  }, [data, cachedData]);
 
   const getAIDescriptionHandler = async () => {
     const description = await getSymbolDescription(data);
