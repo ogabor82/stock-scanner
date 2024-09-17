@@ -1,12 +1,10 @@
 import {
-  Action,
   AsyncThunkAction,
   UnknownAction,
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { RootState } from ".";
+import { ThunkDispatch } from "redux-thunk";
 
 export const fetchFavorites = createAsyncThunk(
   "favorite/fetchFavorites",
@@ -54,7 +52,7 @@ const favoriteSlice = createSlice({
       }
     },
     removeFavorite(state: any, action) {
-      return state.filter((item: any) => item.id !== action.payload.id);
+      return state.filter((item: any) => item !== action.payload);
     },
     replaceFavorites(state: any, action) {
       state = action.payload;
