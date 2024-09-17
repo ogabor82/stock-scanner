@@ -1,7 +1,7 @@
 import { NewsItem } from "../../models/news";
 import { Tag, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, sendFavorite } from "../../store/favorite";
+import { addFavorite, sendFavorites } from "../../store/favorite";
 import { useEffect } from "react";
 
 export function NewsCard({ item }: { item: NewsItem }) {
@@ -13,9 +13,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
   };
 
   useEffect(() => {
-    console.log("Favorite changed");
-
-    dispatch(sendFavorite(favorite));
+    dispatch(sendFavorites(favorite));
   }, [favorite, dispatch]);
 
   return (

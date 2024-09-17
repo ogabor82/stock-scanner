@@ -18,6 +18,23 @@ export const fetchFavorites = createAsyncThunk(
   }
 );
 
+export const sendFavorites = createAsyncThunk(
+  "favorite/sendFavorites",
+  async (favorite: any) => {
+    const response = await fetch(
+      "https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/favorite.json",
+      {
+        method: "PUT",
+        body: JSON.stringify(favorite),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Could not send favorite");
+    }
+  }
+);
+
 const favoriteInitialState: string[] = [];
 
 const favoriteSlice = createSlice({
@@ -43,30 +60,11 @@ const favoriteSlice = createSlice({
       state = action.payload;
       return state;
     });
+    builder.addCase(sendFavorites.fulfilled, (state, action) => {
+      return state;
+    });
   },
 });
-
-export const sendFavorite = (
-  favorite: any
-): ThunkAction<void, RootState, null, Action<string>> => {
-  return async () => {
-    const sendRequest = async () => {
-      const response = await fetch(
-        "https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/favorite.json",
-        {
-          method: "PUT",
-          body: JSON.stringify(favorite),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Could not send favorite");
-      }
-    };
-
-    await sendRequest();
-  };
-};
 
 export const { addFavorite, removeFavorite, replaceFavorites } =
   favoriteSlice.actions;
