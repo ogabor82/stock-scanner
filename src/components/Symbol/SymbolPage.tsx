@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { TopNavigation } from "../Menu/TopNavigation";
 import { SymbolOverview } from "./SymbolOverview";
 import {
@@ -10,11 +10,15 @@ import {
 import { OpenAIFilled } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { Spin } from "antd";
 
 export function SymbolPage() {
   const { symbol } = useParams();
   const [description, setDescription] = useState<string | null>(null);
-  let [symbolData, setSymbolData] = useState<any | null>(null);
+  const [symbolData, setSymbolData] = useState<any | null>(null);
+  const [isAIDescLoading, setIsAIDescLoading] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const {
     data: cachedData,
@@ -65,8 +69,17 @@ export function SymbolPage() {
   }, [data, cachedData]);
 
   const getAIDescriptionHandler = async () => {
-    const description = await getSymbolDescription(data);
-    setDescription(description);
+    try {
+      setIsAIDescLoading(true);
+      const description: any = await queryClient.fetchQuery({
+        queryKey: ["symbolAIDesc", symbol],
+        queryFn: () => getSymbolDescription(symbolData),
+      });
+      setDescription(description);
+      setIsAIDescLoading(false);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
   };
 
   // if (isPending || isCachedLoading) return "Loading...";
@@ -87,6 +100,11 @@ export function SymbolPage() {
             <SymbolOverview data={symbolData} />
           </div>
           <OpenAIFilled onClick={getAIDescriptionHandler} />
+          {isAIDescLoading && (
+            <Spin tip="Loading" size="large">
+              Loading...
+            </Spin>
+          )}
           <ReactMarkdown className="text-left">{description}</ReactMarkdown>
         </>
       )}
