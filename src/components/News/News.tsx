@@ -2,8 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { NewsCard } from "./NewsCard";
 import { newsData } from "../../data/cache/news";
 import { TopNavigation } from "../Menu/TopNavigation";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sendFavorites } from "../../store/favorite";
 
 export function News() {
+  const dispatch = useDispatch<any>();
+  const favorite = useSelector((state: any) => state.favorite);
+
+  useEffect(() => {
+    dispatch(sendFavorites(favorite));
+  }, [favorite, dispatch]);
+
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["newsData"],
     queryFn: async () => {

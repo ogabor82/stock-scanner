@@ -1,5 +1,11 @@
-import { Action, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ThunkAction } from "redux-thunk";
+import {
+  Action,
+  AsyncThunkAction,
+  UnknownAction,
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { RootState } from ".";
 
 export const fetchFavorites = createAsyncThunk(
@@ -69,3 +75,21 @@ const favoriteSlice = createSlice({
 export const { addFavorite, removeFavorite, replaceFavorites } =
   favoriteSlice.actions;
 export default favoriteSlice.reducer;
+function dispatch(
+  arg0: AsyncThunkAction<
+    any,
+    void,
+    {
+      state?: unknown;
+      dispatch?: ThunkDispatch<unknown, unknown, UnknownAction> | undefined;
+      extra?: unknown;
+      rejectValue?: unknown;
+      serializedErrorType?: unknown;
+      pendingMeta?: unknown;
+      fulfilledMeta?: unknown;
+      rejectedMeta?: unknown;
+    }
+  >
+) {
+  throw new Error("Function not implemented.");
+}
