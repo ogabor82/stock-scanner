@@ -9,6 +9,15 @@ export const getSymbol = async (symbol: string | undefined) => {
   return data;
 };
 
+export const getSymbolFromCache = async (symbol: string | undefined) => {
+  const response = await fetch(
+    `https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/cache/${symbol}.json`
+  );
+
+  const data = await response.json();
+  return data;
+};
+
 export const getSymbolDescription = (symbolData: string) => {
   const url = "https://api.openai.com/v1/chat/completions";
 
