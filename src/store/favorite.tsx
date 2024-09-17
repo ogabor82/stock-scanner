@@ -1,6 +1,22 @@
-import { Action, createSlice } from "@reduxjs/toolkit";
+import { Action, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from ".";
+
+export const fetchFavorites = createAsyncThunk(
+  "favorite/fetchFavorites",
+  async () => {
+    const response = await fetch(
+      "https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/favorite.json"
+    );
+
+    if (!response.ok) {
+      throw new Error("Could not fetch favorite");
+    }
+
+    const data = await response.json();
+    return data;
+  }
+);
 
 const favoriteInitialState: string[] = [];
 
@@ -21,6 +37,12 @@ const favoriteSlice = createSlice({
       state = action.payload;
       return state;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchFavorites.fulfilled, (state, action) => {
+      state = action.payload;
+      return state;
+    });
   },
 });
 
@@ -43,31 +65,6 @@ export const sendFavorite = (
     };
 
     await sendRequest();
-  };
-};
-
-export const fetchFavorite = (): ThunkAction<
-  void,
-  RootState,
-  null,
-  Action<string>
-> => {
-  return async (dispatch) => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/favorite.json"
-      );
-
-      if (!response.ok) {
-        throw new Error("Could not fetch favorite");
-      }
-
-      const data = await response.json();
-      return data;
-    };
-
-    const favorite = await fetchData();
-    dispatch(replaceFavorites(favorite));
   };
 };
 
