@@ -9,6 +9,7 @@ import LeftNavigation from "./components/Menu/LeftNavigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchFavorites } from "./store/favorite";
+import { NewPortfolio } from "./components/Portfolio/NewPortfolio";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/symbol/:symbol",
     element: <SymbolPage />,
+  },
+  {
+    path: "/createportfolio",
+    element: <NewPortfolio />,
   },
 ]);
 

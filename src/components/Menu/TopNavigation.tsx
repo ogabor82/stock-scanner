@@ -5,6 +5,7 @@ import {
   HeartFilled,
   HomeFilled,
   StockOutlined,
+  DollarOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
@@ -27,6 +28,11 @@ const items: MenuItem[] = [
     label: "Favorites",
     key: "favorites",
     icon: <HeartFilled style={{ color: "red" }} />,
+  },
+  {
+    label: "New portfolio",
+    key: "createportfolio",
+    icon: <DollarOutlined style={{ color: "green" }} />,
   },
   {
     label: "Navigation Three - Submenu",
@@ -80,12 +86,14 @@ export function TopNavigation() {
         {""}
         <span className="text-red-500">StockSight</span>
       </div>
-      <Menu
-        onClick={onClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-        items={items}
-      />
+      <div className="w-full">
+        <Menu
+          onClick={onClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+          items={items}
+        />
+      </div>
     </div>
   );
 }
