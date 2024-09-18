@@ -39,7 +39,6 @@ export function News() {
 
   return (
     <div>
-      <TopNavigation />
       <h1>News</h1>
       <p>This is a news page.</p>
 

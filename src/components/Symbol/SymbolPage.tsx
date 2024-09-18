@@ -88,7 +88,6 @@ export function SymbolPage() {
 
   return (
     <div>
-      <TopNavigation />
       <div>{isFetching ? "Updating..." : ""}</div>
       {symbolData && (
         <>

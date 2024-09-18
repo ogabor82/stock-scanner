@@ -10,33 +10,32 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchFavorites } from "./store/favorite";
 import { NewPortfolio } from "./components/Portfolio/NewPortfolio";
+import { RootLayot } from "./pages/Root";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: "",
-    element: <Home />,
-  },
-  {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/news",
-    element: <News />,
-  },
-  {
-    path: "/favorites",
-    element: <Favorites />,
-  },
-  {
-    path: "/symbol/:symbol",
-    element: <SymbolPage />,
-  },
-  {
-    path: "/createportfolio",
-    element: <NewPortfolio />,
+    element: <RootLayot />,
+    children: [
+      {
+        path: "/news",
+        element: <News />,
+      },
+      {
+        path: "/favorites",
+        element: <Favorites />,
+      },
+      {
+        path: "/symbol/:symbol",
+        element: <SymbolPage />,
+      },
+      {
+        path: "/createportfolio",
+        element: <NewPortfolio />,
+      },
+    ],
   },
 ]);
 
@@ -50,7 +49,6 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <div className="flex flex-row h-full gap-48">
-          <LeftNavigation />
           <RouterProvider router={router} />
         </div>
       </QueryClientProvider>

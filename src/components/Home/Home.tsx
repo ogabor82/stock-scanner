@@ -10,7 +10,6 @@ export function Home() {
     <div>
       {isAuthenticated ? (
         <>
-          <TopNavigation />
           <h1>Welcome back!</h1>
         </>
       ) : (

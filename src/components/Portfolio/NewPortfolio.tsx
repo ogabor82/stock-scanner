@@ -13,7 +13,6 @@ export function NewPortfolio() {
     <>
       <form onSubmit={handleSubmit}>
         <div className="w-full h-full flex flex-col">
-          <TopNavigation />
           <div className="w-full h-full flex flex-col items-center justify-center">
             <h1 className="text-4xl font-bold">Create a new portfolio</h1>
             <div className="w-1/4 mt-8">
