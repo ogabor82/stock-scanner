@@ -1,4 +1,3 @@
-import { TopNavigation } from "../Menu/TopNavigation";
 import { useDispatch, useSelector } from "react-redux";
 import { Tag } from "antd";
 import { Link } from "react-router-dom";
@@ -15,7 +14,6 @@ export function Favorites() {
   }, [favorite, dispatch]);
 
   function removeHandler(item: any) {
-    console.log("removeHandler", item);
     dispatch(removeFavorite(item));
   }
 

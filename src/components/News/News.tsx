@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { NewsCard } from "./NewsCard";
 import { newsData } from "../../data/cache/news";
-import { TopNavigation } from "../Menu/TopNavigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendFavorites } from "../../store/favorite";
