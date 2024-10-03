@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { TopNavigation } from "../Menu/TopNavigation";
 import { SymbolOverview } from "./SymbolOverview";
 import {
   getSymbol,

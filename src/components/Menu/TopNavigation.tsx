@@ -78,7 +78,7 @@ export function TopNavigation() {
   };
 
   return (
-    <div className="flex justify-between items-center p-4 bg-gray-200">
+    <div className="flex justify-between items-center">
       <div className="font-bold">
         <span className="text-5xl text-green-600">
           <StockOutlined />
