@@ -10,6 +10,7 @@ import { fetchFavorites } from "./store/favorite";
 import { NewPortfolio } from "./components/Portfolio/NewPortfolio";
 import { RootLayout } from "./pages/Root";
 import { SymbolLayout } from "./pages/SymbolLayout";
+import { SymbolOverview } from "./components/Symbol/SymbolOverview/SymbolOverview";
 
 const queryClient = new QueryClient();
 
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/symbol/:symbol",
-            element: <SymbolPage />,
+            element: <SymbolOverview />,
           },
         ],
       },

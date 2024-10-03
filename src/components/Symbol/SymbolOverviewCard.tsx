@@ -1,6 +1,6 @@
 import { Card } from "antd";
 
-export function SymbolOverview(props: any) {
+export function SymbolOverviewCard(props: any) {
   const data = props.data;
   return (
     <div className="w-80">

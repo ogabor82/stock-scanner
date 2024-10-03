@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { SymbolOverview } from "./SymbolOverview";
+import { SymbolOverviewCard } from "./SymbolOverviewCard";
 import {
   getSymbol,
   getSymbolDescription,
@@ -95,7 +95,7 @@ export function SymbolPage() {
           </h1>
           <div className="flex justify-between">
             <img src="https://www.bankrate.com/brp/2023/08/22121220/chart.jpg" />
-            <SymbolOverview data={symbolData} />
+            <SymbolOverviewCard data={symbolData} />
           </div>
           <OpenAIFilled onClick={getAIDescriptionHandler} />
           {isAIDescLoading && (
