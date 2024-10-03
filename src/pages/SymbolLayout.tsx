@@ -60,8 +60,17 @@ export function SymbolLayout() {
     return "An error has occurred: " + error?.message + cachedError?.message;
 
   return (
-    <div className="flex flex-col gap-4">
-      <SymbolHeader symbol={symbolData.Symbol} name={symbolData.Name} />
+    <div className="flex flex-col gap-4 w-2/3">
+      <SymbolHeader
+        symbol={symbolData.Symbol}
+        name={symbolData.Name}
+        PERatio={symbolData.PERatio}
+        PriceToSalesRatioTTM={symbolData.PriceToSalesRatioTTM}
+        MarketCapitalization={symbolData.MarketCapitalization}
+        EPS={symbolData.EPS}
+        DividendPerShare={symbolData.DividendPerShare}
+        DividendYield={symbolData.DividendYield}
+      />
       <div className="border border-black flex ">
         <Link to={"/symbol/" + symbol}>Stock Overview</Link>
         <Link to={"/symbol/" + symbol}>Earnings</Link>
