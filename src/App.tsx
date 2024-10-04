@@ -11,6 +11,8 @@ import { NewPortfolio } from "./components/Portfolio/NewPortfolio";
 import { RootLayout } from "./pages/Root";
 import { SymbolLayout } from "./pages/SymbolLayout";
 import { SymbolOverview } from "./components/Symbol/SymbolOverview/SymbolOverview";
+import { PortfolioOverview } from "./components/Portfolio/PortfolioOverview";
+import { PortfolioLayout } from "./pages/PortfolioLayout";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +40,16 @@ const router = createBrowserRouter([
           {
             path: "/symbol/:symbol",
             element: <SymbolOverview />,
+          },
+        ],
+      },
+      {
+        path: "/portfolio",
+        element: <PortfolioLayout />,
+        children: [
+          {
+            path: "/portfolio/:portfolioId",
+            element: <PortfolioOverview />,
           },
         ],
       },
