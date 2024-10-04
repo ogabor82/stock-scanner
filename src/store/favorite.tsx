@@ -1,17 +1,9 @@
-import {
-  AsyncThunkAction,
-  UnknownAction,
-  createAsyncThunk,
-  createSlice,
-} from "@reduxjs/toolkit";
-import { ThunkDispatch } from "redux-thunk";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchFavorites = createAsyncThunk(
   "favorite/fetchFavorites",
   async () => {
-    const response = await fetch(
-      "https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/favorite.json"
-    );
+    const response = await fetch("http://localhost:3000/favorites");
 
     if (!response.ok) {
       throw new Error("Could not fetch favorite");
@@ -73,21 +65,3 @@ const favoriteSlice = createSlice({
 export const { addFavorite, removeFavorite, replaceFavorites } =
   favoriteSlice.actions;
 export default favoriteSlice.reducer;
-function dispatch(
-  arg0: AsyncThunkAction<
-    any,
-    void,
-    {
-      state?: unknown;
-      dispatch?: ThunkDispatch<unknown, unknown, UnknownAction> | undefined;
-      extra?: unknown;
-      rejectValue?: unknown;
-      serializedErrorType?: unknown;
-      pendingMeta?: unknown;
-      fulfilledMeta?: unknown;
-      rejectedMeta?: unknown;
-    }
-  >
-) {
-  throw new Error("Function not implemented.");
-}

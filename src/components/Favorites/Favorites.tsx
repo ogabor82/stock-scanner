@@ -9,9 +9,9 @@ export function Favorites() {
   const dispatch = useDispatch<any>();
   const favorite = useSelector((state: any) => state.favorite);
 
-  useEffect(() => {
-    dispatch(sendFavorites(favorite));
-  }, [favorite, dispatch]);
+  // useEffect(() => {
+  //   dispatch(sendFavorites(favorite));
+  // }, [favorite, dispatch]);
 
   function removeHandler(item: any) {
     dispatch(removeFavorite(item));
@@ -22,14 +22,12 @@ export function Favorites() {
       <h1>Favorites</h1>
       <p>This is a favorites page.</p>
       {favorite.map((item: any) => (
-        <Tag color="blue" key={item}>
-          <Link to={`/symbol/${item}`} key={item}>
-            {item}{" "}
-          </Link>
+        <Tag color="blue" key={item.id}>
+          <Link to={`/symbol/${item.symbol}`}>{item.symbol} </Link>
           <CloseOutlined
             className="hover:text-gray-950"
             onClick={() => {
-              removeHandler(item);
+              removeHandler(item.symbol);
             }}
           />
         </Tag>
