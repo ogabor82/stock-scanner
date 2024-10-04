@@ -1,76 +1,42 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, Outlet, useParams } from "react-router-dom";
-import { getSymbol, getSymbolFromCache } from "../data/query";
-import { useEffect, useState } from "react";
+import { getSymbol } from "../data/query";
 import { SymbolHeader } from "../components/Symbol/SymbolHeader";
 
 export function SymbolLayout() {
   const { symbol } = useParams();
-  const [symbolData, setSymbolData] = useState<any | null>(null);
 
   const {
-    data: cachedData,
-    error: cachedError,
-    isLoading: isCachedLoading,
+    isPending,
+    error,
+    data: symbolData,
+    isFetching,
   } = useQuery({
-    queryKey: ["symbolDataCached", symbol],
-    queryFn: () => {
-      return getSymbolFromCache(symbol);
-    },
-    staleTime: 3000000,
-  });
-
-  const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["symbolData", symbol],
     queryFn: () => {
       return getSymbol(symbol);
     },
     staleTime: 3000000,
-    enabled: cachedData === null,
   });
 
-  useEffect(() => {
-    if (cachedData) {
-      setSymbolData(cachedData);
-    } else {
-      setSymbolData(data);
-    }
-  }, [cachedData, data]);
+  if (isPending) return "Loading...";
 
-  useEffect(() => {
-    const cacheData = async () => {
-      const response = await fetch(
-        `https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/cache/${symbol}.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify(data),
-        }
-      );
+  if (isFetching) return "Updating...";
 
-      if (!response.ok) {
-        throw new Error("Could not send favorite");
-      }
-    };
-    if (data && !cachedData) {
-      cacheData();
-    }
-  }, [data, cachedData]);
-
-  if (error || cachedError)
-    return "An error has occurred: " + error?.message + cachedError?.message;
+  if (error) return "An error has occurred: " + error?.message;
 
   return (
     <div className="flex flex-col gap-4 w-2/3">
       {symbolData && (
         <SymbolHeader
-          symbol={symbolData.Symbol}
-          name={symbolData.Name}
+          symbol={symbolData.symbol}
+          name={symbolData.name}
           PERatio={symbolData.PERatio}
-          PriceToSalesRatioTTM={symbolData.PriceToSalesRatioTTM}
-          MarketCapitalization={symbolData.MarketCapitalization}
+          PriceToSalesRatioTTM={symbolData.priceToSalesRatioTTM}
+          MarketCapitalization={symbolData.marketCapitalization}
           EPS={symbolData.EPS}
-          DividendPerShare={symbolData.DividendPerShare}
-          DividendYield={symbolData.DividendYield}
+          DividendPerShare={symbolData.dividendPerShare}
+          DividendYield={symbolData.dividendYield}
         />
       )}
       <div className="border border-black flex ">

@@ -1,9 +1,5 @@
 export const getSymbol = async (symbol: string | undefined) => {
-  const response = await fetch(
-    `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${
-      import.meta.env.VITE_VANTAGE_KEY_REAL
-    }`
-  );
+  const response = await fetch(`http://localhost:3000/symbol/${symbol}`);
 
   const data = await response.json();
   return data;
