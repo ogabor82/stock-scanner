@@ -1,34 +1,27 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import { getSymbolFromCache } from "../../data/query";
+import { getPortfolio } from "../../data/query";
 
 export function PortfolioOverview() {
   const favorite = useSelector((state: any) => state.favorite);
-  const queryClient = useQueryClient();
-  const [portfolioData, setPortfolioData] = useState<any[]>([]);
+  const symbols = favorite.map((item: any) => item.symbol);
 
-  useEffect(() => {
-    console.log(favorite);
+  const {
+    isPending,
+    error,
+    data: portfolioData,
+    isFetching,
+  } = useQuery({
+    queryKey: ["portfolioData"],
+    queryFn: () => {
+      return getPortfolio(symbols);
+    },
+    staleTime: 3000000,
+  });
 
-    let data: any[] = [];
-    async function fetchData() {
-      for (const symbol of favorite) {
-        let symbolData = await queryClient.fetchQuery({
-          queryKey: ["symbolDataCached", symbol.symbol],
-          queryFn: () => {
-            return getSymbolFromCache(symbol.symbol);
-          },
-        });
-        if (symbolData) {
-          data.push(symbolData);
-        }
-        console.log(data);
-      }
-      setPortfolioData(data);
-    }
-    fetchData();
-  }, [favorite]);
+  if (isPending) return "Loading...";
+  if (isFetching) return "Updating...";
+  if (error) return "An error has occurred: " + error?.message;
 
   return (
     <div>
@@ -45,12 +38,12 @@ export function PortfolioOverview() {
         </tr>
         {portfolioData &&
           portfolioData.map((item: any, index: any) => (
-            <tr key={item.Symbol}>
-              <td>{item.Symbol}</td>
-              <td>{item.Name}</td>
+            <tr key={item.symbol}>
+              <td>{item.symbol}</td>
+              <td>{item.name}</td>
               <td>{item.PERatio}</td>
-              <td>{item.PriceToSalesRatioTTM}</td>
-              <td>{Math.round(item.DividendYield * 10000) / 100}%</td>
+              <td>{item.priceToSalesRatioTTM}</td>
+              <td>{Math.round(item.dividendYield * 10000) / 100}%</td>
             </tr>
           ))}
       </table>
