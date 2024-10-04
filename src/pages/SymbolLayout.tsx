@@ -61,16 +61,18 @@ export function SymbolLayout() {
 
   return (
     <div className="flex flex-col gap-4 w-2/3">
-      <SymbolHeader
-        symbol={symbolData.Symbol}
-        name={symbolData.Name}
-        PERatio={symbolData.PERatio}
-        PriceToSalesRatioTTM={symbolData.PriceToSalesRatioTTM}
-        MarketCapitalization={symbolData.MarketCapitalization}
-        EPS={symbolData.EPS}
-        DividendPerShare={symbolData.DividendPerShare}
-        DividendYield={symbolData.DividendYield}
-      />
+      {symbolData && (
+        <SymbolHeader
+          symbol={symbolData.Symbol}
+          name={symbolData.Name}
+          PERatio={symbolData.PERatio}
+          PriceToSalesRatioTTM={symbolData.PriceToSalesRatioTTM}
+          MarketCapitalization={symbolData.MarketCapitalization}
+          EPS={symbolData.EPS}
+          DividendPerShare={symbolData.DividendPerShare}
+          DividendYield={symbolData.DividendYield}
+        />
+      )}
       <div className="border border-black flex ">
         <Link to={"/symbol/" + symbol}>Stock Overview</Link>
         <Link to={"/symbol/" + symbol}>Earnings</Link>

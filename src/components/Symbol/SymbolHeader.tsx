@@ -1,3 +1,9 @@
+import {
+  PlusOutlined,
+  ShareAltOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
+
 interface SymbolHeaderProps {
   symbol: string;
   name: string;
@@ -21,13 +27,23 @@ export function SymbolHeader(props: SymbolHeaderProps) {
     DividendYield,
   } = props;
   return (
-    <div className="w-full border border-gray-400 rounded-md bg-white">
+    <div className="w-full border border-gray-400 rounded-md bg-white p-8">
       <div className="flex flex-row justify-between">
         <div>
           <div>{name}</div>
           <div>{symbol}</div>
         </div>
-        <div>Favorite</div>
+        <div className="flex flex-row gap-2">
+          <div>
+            <StarOutlined />
+          </div>
+          <div>
+            <PlusOutlined />
+          </div>
+          <div>
+            <ShareAltOutlined />
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-row justify-between gap-4">
