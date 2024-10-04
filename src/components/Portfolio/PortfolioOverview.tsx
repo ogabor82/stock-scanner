@@ -15,9 +15,9 @@ export function PortfolioOverview() {
     async function fetchData() {
       for (const symbol of favorite) {
         let symbolData = await queryClient.fetchQuery({
-          queryKey: ["symbolDataCached", symbol],
+          queryKey: ["symbolDataCached", symbol.symbol],
           queryFn: () => {
-            return getSymbolFromCache(symbol);
+            return getSymbolFromCache(symbol.symbol);
           },
         });
         if (symbolData) {
