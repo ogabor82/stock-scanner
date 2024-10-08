@@ -3,7 +3,6 @@ import { Favorites } from "./components/Favorites/Favorites";
 import { News } from "./components/News/News";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { SymbolPage } from "./components/Symbol/SymbolPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchFavorites } from "./store/favorite";
@@ -13,6 +12,8 @@ import { SymbolLayout } from "./pages/SymbolLayout";
 import { SymbolOverview } from "./components/Symbol/SymbolOverview/SymbolOverview";
 import { PortfolioOverview } from "./components/Portfolio/PortfolioOverview";
 import { PortfolioLayout } from "./pages/PortfolioLayout";
+import "@mantine/core/styles.css";
+import { MantineProvider } from "@mantine/core";
 
 const queryClient = new QueryClient();
 
@@ -65,11 +66,13 @@ function App() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <div className="flex flex-row">
-          <RouterProvider router={router} />
-        </div>
-      </QueryClientProvider>
+      <MantineProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="flex flex-row">
+            <RouterProvider router={router} />
+          </div>
+        </QueryClientProvider>
+      </MantineProvider>
     </>
   );
 }
