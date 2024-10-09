@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { getPortfolio } from "../../data/query";
-import { Table } from "@mantine/core";
+import { Anchor, Table } from "@mantine/core";
 import { AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export function PortfolioOverview() {
   const favorite = useSelector((state: any) => state.favorite);
@@ -45,7 +46,11 @@ export function PortfolioOverview() {
               <AnimatePresence>
                 {portfolioData.map((item: any) => (
                   <Table.Tr key={item.symbol}>
-                    <Table.Td>{item.symbol}</Table.Td>
+                    <Table.Td>
+                      <Anchor>
+                        <Link to={`/symbol/${item.symbol}`}>{item.symbol}</Link>
+                      </Anchor>
+                    </Table.Td>
                     <Table.Td>{item.name}</Table.Td>
                     <Table.Td>{item.PERatio}</Table.Td>
                     <Table.Td>{item.priceToSalesRatioTTM}</Table.Td>
