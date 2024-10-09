@@ -14,6 +14,7 @@ import { PortfolioOverview } from "./components/Portfolio/PortfolioOverview";
 import { PortfolioLayout } from "./pages/PortfolioLayout";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
+import { SymbolDividend } from "./components/Symbol/SymbolDividend/SymbolDividend";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         path: "/symbol",
         element: <SymbolLayout />,
         children: [
+          {
+            path: "/symbol/:symbol/dividends",
+            element: <SymbolDividend />,
+          },
           {
             path: "/symbol/:symbol",
             element: <SymbolOverview />,

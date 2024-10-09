@@ -13,6 +13,13 @@ export const getPortfolio = async (symbols: string[] | undefined) => {
   return data;
 };
 
+export const getDividends = async (symbol: string | undefined) => {
+  const response = await fetch(`http://localhost:3000/dividend/${symbol}`);
+
+  const data = await response.json();
+  return data;
+};
+
 export const getSymbolFromCache = async (symbol: string | undefined) => {
   const response = await fetch(
     `https://stock-scanner-6109b-default-rtdb.europe-west1.firebasedatabase.app/cache/${symbol}.json`

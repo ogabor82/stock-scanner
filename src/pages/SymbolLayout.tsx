@@ -39,8 +39,9 @@ export function SymbolLayout() {
           DividendYield={symbolData.dividendYield}
         />
       )}
-      <div className="border border-black flex ">
+      <div className="border border-black flex gap-8">
         <Link to={"/symbol/" + symbol}>Stock Overview</Link>
+        <Link to={`/symbol/${symbol}/dividends`}>Dividends</Link>
         <Link to={"/symbol/" + symbol}>Earnings</Link>
         <Link to={"/symbol/" + symbol}>Headlines</Link>
       </div>
