@@ -16,6 +16,7 @@ import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { SymbolDividend } from "./components/Symbol/SymbolDividend/SymbolDividend";
 import { SymbolForecast } from "./components/Symbol/SymbolForecast/SymbolForecast";
+import { PortfolioDiversification } from "./components/Portfolio/PortfolioDiversification/PortfolioDiversification";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
         path: "/portfolio",
         element: <PortfolioLayout />,
         children: [
+          {
+            path: "/portfolio/:portfolioId/diversification",
+            element: <PortfolioDiversification />,
+          },
           {
             path: "/portfolio/:portfolioId",
             element: <PortfolioOverview />,

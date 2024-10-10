@@ -36,15 +36,12 @@ export function SymbolForecast() {
   if (error) return "An error has occurred: " + error?.message;
 
   useEffect(() => {
-    // console.log(symbolData);
     const sumAnalystRatingCount =
       parseInt(symbolData.analystRatingStrongBuy) +
       parseInt(symbolData.analystRatingBuy) +
       parseInt(symbolData.analystRatingHold) +
       parseInt(symbolData.analystRatingSell) +
       parseInt(symbolData.analystRatingStrongSell);
-
-    console.log(sumAnalystRatingCount);
 
     const ratingData = [
       {
