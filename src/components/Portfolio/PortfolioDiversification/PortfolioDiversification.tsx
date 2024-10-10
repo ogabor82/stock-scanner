@@ -78,13 +78,15 @@ export function PortfolioDiversification() {
               innerRadius: 0,
               outerRadius: 215,
               arcLabel: (item) => `${item.label}`,
+              arcLabelRadius: 140,
               id: "sector-series",
               data: sectorData,
             },
             {
               innerRadius: 220,
               outerRadius: 240,
-
+              arcLabel: (item) => `${item.label}`,
+              arcLabelRadius: 270,
               id: "industry-series",
               data: industryData,
             },
