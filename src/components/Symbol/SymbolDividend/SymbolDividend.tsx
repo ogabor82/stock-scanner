@@ -41,7 +41,9 @@ export function SymbolDividend() {
       <LineChart
         width={1200}
         height={300}
-        data={dividendList.reverse()}
+        data={dividendList
+          .reverse()
+          .filter((item: any) => item.declarationDate != "None")}
         margin={{
           top: 5,
           right: 30,
@@ -75,15 +77,17 @@ export function SymbolDividend() {
           </Table.Thead>
           <Table.Tbody>
             {dividendList.length > 0 ? (
-              dividendList.map((item: any) => (
-                <Table.Tr key={item.exDividendDate}>
-                  <Table.Td>{item.exDividendDate}</Table.Td>
-                  <Table.Td>{item.declarationDate}</Table.Td>
-                  <Table.Td>{item.recordDate}</Table.Td>
-                  <Table.Td>{item.paymentDate}</Table.Td>
-                  <Table.Td>{item.amount}</Table.Td>
-                </Table.Tr>
-              ))
+              dividendList
+                .filter((item: any) => item.declarationDate != "None")
+                .map((item: any) => (
+                  <Table.Tr key={item.exDividendDate}>
+                    <Table.Td>{item.exDividendDate}</Table.Td>
+                    <Table.Td>{item.declarationDate}</Table.Td>
+                    <Table.Td>{item.recordDate}</Table.Td>
+                    <Table.Td>{item.paymentDate}</Table.Td>
+                    <Table.Td>{item.amount}</Table.Td>
+                  </Table.Tr>
+                ))
             ) : (
               <Table.Tr>
                 <Table.Td colSpan={5}>No dividends</Table.Td>

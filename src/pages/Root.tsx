@@ -1,11 +1,10 @@
-import LeftNavigation from "../components/Menu/LeftNavigation";
 import { Outlet } from "react-router-dom";
-import { TopNavigation } from "../components/Menu/TopNavigation";
+import Navbar from "../components/Menu/Navbar";
 
 export function RootLayout() {
   return (
     <div className="flex flex-col w-full gap-4">
-      <TopNavigation />
+      <Navbar />
 
       <div className="w-full flex flex-row justify-center">
         {/* <LeftNavigation /> */}

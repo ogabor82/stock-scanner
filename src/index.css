@@ -5,3 +5,14 @@
 :root {
     background-color:rgba(233, 234, 236, 0.849);
 }
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  .animate-marquee {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+  
