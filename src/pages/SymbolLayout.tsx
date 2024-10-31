@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { getSymbol } from "../data/query";
-import { SymbolHeader } from "../components/Symbol/SymbolHeader";
+import StockCard from "../components/Symbol/StockCard";
 
 export function SymbolLayout() {
   const { symbol } = useParams();
@@ -28,7 +28,7 @@ export function SymbolLayout() {
   return (
     <div className="flex flex-col gap-4 w-2/3">
       {symbolData && (
-        <SymbolHeader
+        <StockCard
           symbol={symbolData.symbol}
           name={symbolData.name}
           PERatio={symbolData.PERatio}
@@ -39,13 +39,6 @@ export function SymbolLayout() {
           DividendYield={symbolData.dividendYield}
         />
       )}
-      <div className="border border-black flex gap-8">
-        <Link to={"/symbol/" + symbol}>Stock Overview</Link>
-        <Link to={`/symbol/${symbol}/dividends`}>Dividends</Link>
-        <Link to={`/symbol/${symbol}/forecast`}>Analyst Forecasts</Link>
-        <Link to={"/symbol/" + symbol}>Earnings</Link>
-        <Link to={"/symbol/" + symbol}>Headlines</Link>
-      </div>
       <Outlet />
     </div>
   );
